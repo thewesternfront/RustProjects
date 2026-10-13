@@ -9,18 +9,18 @@ fn main() {
     println!("x = {}", x);
     println!("Now I can change the variable because it is no longer immutable");
     println!("Calling a function");
-    testing(11,44);
+    testing(11, 44);
     testing_floats(11.0, 22.0);
     data_types_test();
+    type_conversions();
 }
-
 
 fn testing(num1: i32, num2: i32) {
     let mut result = num1 + num2;
     println!("Result = {}", result);
 }
 
-fn testing_floats(num1: f32, num2: f32 ) {
+fn testing_floats(num1: f32, num2: f32) {
     let result = num1 + num2;
     println!("Result = {}", result);
 }
@@ -40,11 +40,16 @@ fn data_types_test() {
     let mut t_or_f: bool = true;
     println!("t_or_f = {}", t_or_f);
     t_or_f = false;
+    let x: u8 = 4;
+
+    let y: u32 = x as u32; // cast with `as`
+    let y: u32 = u32::from(x); // From trait
+    let y: u32 = x.into(); // Into trait (target type comes from the annotation)
     println!("t_or_f = {}", t_or_f);
 
     // characters and possibly determining size...
     let my_char: char = 'H';
-    println!("my_char:   {} bytes", mem::size_of_val(&my_char));   // 4
+    println!("my_char:   {} bytes", mem::size_of_val(&my_char)); // 4
 
     //*** Compound Data Types ***//
     // Arrays, Tuples, etc.
@@ -73,4 +78,16 @@ fn data_types_test() {
         }
         println!();
     }
+}
+
+// Converting types and considering data loss protection
+fn type_conversions() {
+    let x: u8 = 4;
+
+    let y: u32 = x as u32; // cast with `as`
+    println!("x = {}, y = {}", x, y);
+    let y: u32 = u32::from(x); // From trait
+    println!("x = {}, y = {}", x, y);
+    let y: u32 = x.into(); // Into trait (target type comes from the annotation)
+    println!("x = {}, y = {}", x, y);
 }
